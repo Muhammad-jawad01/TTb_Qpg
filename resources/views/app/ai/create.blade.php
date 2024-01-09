@@ -8,6 +8,10 @@
 @endpush
 
 @section('content')
+    {{-- <div id="loader" style="display: none;">
+        Loading...
+    </div> --}}
+
     <!--  Navbar Starts / Breadcrumb Area  -->
     <div class="sub-header-container">
         <header class="header navbar navbar-expand-sm">
@@ -51,37 +55,9 @@
                                                     class="btn btn-primary">Back</a></div>
                                         </div>
                                     </div>
-                                    <form action="{{ route('ai.question.search') }}" method="POST">
+                                    <form id="ai-question-form" method="POST">
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <select name="class_id" class="form-control">
-                                                    <option value="">Select Class</option>
-                                                    @foreach ($classlevel as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <select name="term_id" class="form-control">
-                                                    <option value="">Select Term</option>
-                                                    @foreach ($term as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4 ">
-                                                <select name="subject_id" class="form-control">
-                                                    <option value="">Select subject</option>
-                                                    @foreach ($subject as $value)
-                                                        <option value="{{ $value->id }}">{{ $value->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
 
-
-                                        </div>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-12 col-md-12 mt-3">
                                                 <div class="form-group">
@@ -116,6 +92,78 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row layout-top-spacing date-table-container">
+                            <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                                <div class="widget-content widget-content-area br-6">
+                                    <form action="{{ route('save.ai.response') }}" method="POST">
+                                        @csrf
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <select name="class_id" class="form-control">
+                                                    <option value="">Select Class</option>
+                                                    @foreach ($classlevel as $value)
+                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <select name="term_id" class="form-control">
+                                                    <option value="">Select Term</option>
+                                                    @foreach ($term as $value)
+                                                        <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 ">
+                                                <select name="subject_id" class="form-control">
+                                                    <option value="">Select subject</option>
+                                                    @foreach ($subject as $value)
+                                                        <option value="{{ $value->id }}">{{ $value->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mt-3 ">
+                                                <select name="chapter_id" class="form-control">
+                                                    <option value="">Select Chapter</option>
+                                                    @foreach ($chapter as $value)
+                                                        <option value="{{ $value->id }}">{{ $value->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 mt-3 ">
+                                                <select name="type" id="question-type" d-sn="1"
+                                                    class="form-control">
+                                                    <option value="">Select Question Type</option>
+                                                    <option value="1">Mcq</option>
+                                                    <option value="2">Short Question</option>
+                                                    <option value="3">Long Question</option>
+
+
+
+                                                </select>
+                                            </div>
+ 
+
+
+                                        </div>
+                                        <div class="col-md-12 mt-5" id="ai-question-response">
+
+
+                                        </div>
+                                        <input type="hidden" name="paragraph_save" id="ai-question-response11">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-3">
+                                            <button type="submit" class="btn btn-primary">Save AI Response</button>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -147,5 +195,35 @@
                 filebrowserUploadMethod: 'form'
             });
         }
+
+        $(document).ready(function() {
+            $('#ai-question-form').submit(function(e) {
+                e.preventDefault();
+                $('#loader').show();
+
+                $.ajax({
+                    // url: "{{ route('ai.question.search') }}",
+                    url: "{{ route('ai.question.search') }}",
+                    method: "POST",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // Display the response
+                        $('#ai-question-response').html(response);
+                        $('#ai-question-response11').val(response);
+
+                    },
+                    error: function(error) {
+                        // Handle the error
+                        $('#ai-question-response').html(
+                            'Error: Could not get response from Gemini AI.');
+                    }
+
+                    // complete: function() {
+                    //     // Hide loader after the request is completed
+                    //     $('#loader').hide();
+                    // }
+                });
+            });
+        });
     </script>
 @endpush

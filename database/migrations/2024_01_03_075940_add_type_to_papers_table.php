@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('permissions', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->unsignedBigInteger('menu_id')->nullable();
-            $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
+        Schema::table('papers', function (Blueprint $table) {
+            $table->string('type')->after('session')->nullable();
         });
     }
-
 
     /**
      * Reverse the migrations.
@@ -28,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('permissions', function (Blueprint $table) {
+        Schema::table('papers', function (Blueprint $table) {
             //
         });
     }

@@ -91,7 +91,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-3 mt-2">
+                                            <div class="col-xs-12 col-sm-12 col-md-6 mt-2">
                                                 <div class="form-group">
                                                     <strong>Time Allowed:</strong>
 
@@ -106,7 +106,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-3 mt-2">
+                                            <div class="col-xs-12 col-sm-12 col-md-6 mt-2">
                                                 <div class="form-group">
                                                     <strong>Marks:</strong>
 
@@ -120,7 +120,7 @@
                                                     </select> --}}
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-3 mt-2">
+                                            <div class="col-xs-12 col-sm-12 col-md-4 mt-2">
                                                 <div class="form-group">
                                                     <strong>Paper Type:</strong>
 
@@ -132,12 +132,24 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-xs-12 col-sm-12 col-md-3 mt-2">
+                                            <div class="col-xs-12 col-sm-12 col-md-4 mt-2">
+                                                <div class="form-group">
+                                                    <strong>Type Online Submissio Or Nromal:</strong>
+
+                                                    {{-- <input type="text" class="form-control" name="papertype"> --}}
+                                                    <select class="form-control" name="type">
+                                                        <option>Type Online Submissio Or Nromal</option>
+                                                        <option value="Submit_Online">Submit Online</option>
+                                                        <option value="Submit_Offline">Submit Offline</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-4 mt-2">
                                                 <div class="form-group">
                                                     <strong>Session:</strong>
 
-                                                    <input type="number" id="date" min="2023" step="1"
-                                                        value="2023" max="2099" class="form-control" name="session">
+                                                    <input type="text" id="date" min="2023" step="1"
+                                                        class="form-control" name="session">
 
                                                 </div>
                                             </div>

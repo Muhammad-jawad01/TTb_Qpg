@@ -412,6 +412,21 @@
                         {{ __('QPG AI Module') }}
                     </a>
                 </li>
+
+                <li>
+                    <a data-active="{{ is_active_route(['app/AI/index/']) }}"
+                        href="{{ route('ai.question.paper') }}">
+                        {{ __('QPG AI Module paper') }}
+                    </a>
+                </li>
+
+
+                <li>
+                    <a data-active="{{ is_active_route(['app/AI/index/']) }}"
+                        href="{{ route('ai.question.paper.start') }}">
+                        {{ __('QPG AI Module Paper Start') }}
+                    </a>
+                </li>
             </ul>
         </li>
 

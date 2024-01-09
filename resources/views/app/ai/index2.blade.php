@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', 'Question Paper ')
+@section('title', 'Question List ')
 @push('plugin-styles')
     {!! Html::style('plugins/table/datatable/datatables.css') !!}
     {!! Html::style('plugins/table/datatable/dt-global_style.css') !!}
@@ -18,7 +18,7 @@
                     <div class="page-header">
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:void(0);">{{ __(' Question Paper') }}</a>
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">{{ __(' Question List') }}</a>
                                 </li>
                             </ol>
                         </nav>
@@ -43,13 +43,13 @@
                                     <div class="row">
 
                                         <div class="col-sm-10">
-                                            <h4 class="table-header">{{ __(' Question Paper') }}</h4>
+                                            <h4 class="table-header">{{ __(' Paper List') }}</h4>
                                         </div>
                                         <div class="col-sm-2 text-right">
-                                            @can('paper-create')
-                                                <a class="btn btn-primary" href="{{ route('papers.create') }}">
+                                            {{-- @can('paper-create')
+                                                <a class="btn btn-primary" href="{{ route('ai.question.create') }}">
                                                     Create</a>
-                                            @endcan
+                                            @endcan --}}
                                         </div>
 
 
@@ -59,7 +59,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
-                                                        <th>Paper</th>
+                                                        <th>title</th>
                                                         <th>Class</th>
                                                         <th>Subject</th>
                                                         <th>Term</th>
@@ -102,15 +102,18 @@
                 },
                 "lengthMenu": [7, 14, 21, 28],
                 "pageLength": 7,
-                "ajax": "{{ route('papers.index') }}",
+                "ajax": "{{ route('ai.question.paper') }}",
                 "processing": true,
                 "serverSide": true,
                 "columns": [{
                         data: 'id',
                         render: function(data, type, row, meta) {
+                            // Adjust the 'id' value to start from 0
                             return meta.row + meta.settings._iDisplayStart;
                         },
                     },
+
+
                     {
                         data: 'name',
                     },

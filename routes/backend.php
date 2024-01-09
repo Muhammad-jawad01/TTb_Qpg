@@ -58,35 +58,23 @@ Route::group(['prefix' => 'app', 'middleware' => 'auth'], function () {
         Route::post('chapterupdate', [ChapterController::class, 'update'])->name('chapterupdate');
         Route::post('classlevelupdate', [ClassLevelController::class, 'update'])->name('classlevelupdate');
     });
-
-
     // Get All Drop Down Menu 
     Route::get('dropdown/{table}', [DropDownController::class, 'index']);
     Route::get('account-settings', [UserController::class, 'account_settings'])->name('user-account-settings');
     Route::post('update-setting', [UserController::class, 'update_setting'])->name('user-update-setting');
-
-
-
-
-
-
-
     // GPT routs 
     Route::group(['prefix' => 'AI'], function () {
-
         Route::get('/load-chat', [OpenAIController::class, 'loadChat']);
         Route::get('/index', [OpenAIController::class, 'index'])->name('ai.question.list');
+        Route::get('/index/paper', [OpenAIController::class, 'index2'])->name('ai.question.paper');
+        Route::get('/index/paper/start', [OpenAIController::class, 'start'])->name('ai.question.paper.start');
+        // routes/web.php
+        // Route::post('/save-answer', [OpenAIController::class, 'saveAnswer'])->name('save.answer');
+
         Route::get('/create', [OpenAIController::class, 'create'])->name('ai.question.create');
         Route::post('/Search', [OpenAIController::class, 'AIsearch'])->name('ai.question.search');
-        // Route::get('/start-chat/{character_id}', [OpenAIController::class, 'startChat']);
-        Route::post('/chat-api', [OpenAIController::class, 'httpApproach']);
-        Route::get('/categories-list', [OpenAIController::class, 'getCategoriesList']);
-        Route::get('/category-based-characters/{category_id}', [OpenAIController::class, 'getCategoryViseCharacters']);
-        Route::get('/recommended-characters', [OpenAIController::class, 'getRecommendedCharacters']);
-        Route::get('/chats', [OpenAIController::class, 'getChats']);
-        Route::get('/recently-contacted-characters', [OpenAIController::class, 'getRecentlyContactedCharacters']);
-        Route::get('/recently-contacted-characters-chat-page', [OpenAIController::class, 'getRecentlyContactedCharactersChatPage']);
-        Route::delete('/delete-chat/{chat_id}', [OpenAIController::class, 'deleteChat']);
-        Route::get('/open-chat/{chat_id}', [OpenAIController::class, 'openChat']);
+        Route::post('/store', [OpenAIController::class, 'store'])->name('save.ai.response');
+        Route::resource('paper-answers', PaperAnswerController::class);
+        Route::post('/paper-answers', [PaperAnswerController::class, 'store'])->name('Ai.save.answer');
     });
 });

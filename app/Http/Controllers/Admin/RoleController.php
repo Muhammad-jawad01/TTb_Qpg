@@ -38,7 +38,7 @@ class RoleController extends Controller
         if ($request->ajax()) {
             $modelData = Role::query();
             return Datatables::of($modelData)->addColumn('action', function ($row) {
-                if($row->is_editable==false){
+                if ($row->is_editable == false) {
                     return '';
                 }
                 return customButton($row, 'role', 'roles');
@@ -81,9 +81,8 @@ class RoleController extends Controller
             }
             Alert::toast($errorDisplay, 'error')->timerProgressBar();
             return redirect()->back()->withErrors($validator)->withInput();
-
         }
-            
+
 
         $role = Role::create(['name' => $request->input('name'), 'guard_name' => $request->input('guard_name')]);
         $role->syncPermissions($request->input('permission'));
@@ -114,7 +113,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-       P
+
         return view('app.role.edit', compact('role', 'permission', 'rolePermissions', 'menus'));
     }
 
@@ -127,7 +126,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
+
 
         $validator = Validator::make($request->all(), [
             'name'     => 'required|regex:/^[\pL\s\-]+$/u',
@@ -141,7 +140,6 @@ class RoleController extends Controller
             }
             Alert::toast($errorDisplay, 'error')->timerProgressBar();
             return redirect()->back()->withErrors($validator)->withInput();
-
         }
 
         $role = Role::find($id);

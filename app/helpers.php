@@ -101,6 +101,30 @@ function customButton($model, $permission, $route = null, $isShowView = false)
  ' . $showPermissionView .  ($editPermission == 1 ? '<a class="dropdown-item" href="' .  route($route . '.edit', $model->id) . '">Edit</a>' : null)
         . ($deletePermission == 1 ?  '<a class="dropdown-item destory" href="javascript:void(0);"  onclick="distory(\'' .  route($route . ".destroy", $model->id) . '\')">Delete</a>' : null) .
         '</div>
+
+</div>' : null;
+}
+function customButtonbtn($model, $permission, $route = null, $isShowView = false)
+{
+    $editPermission = Auth::User()->can($permission . '-edit');
+    $showPermission = Auth::User()->can($permission . '-list');
+    $deletePermission =  Auth::User()->can($permission . '-delete');
+    $editorDeletePermission = Auth::User()->canany([$permission . '-edit', $permission . '-delete']);
+    $showPermissionView = '';
+    if ($isShowView == true) {
+        $showPermissionView =  $showPermission == 1 ? '<a class="dropdown-item" href="' .  route($route . '.show', $model->id) . '">show</a>' : '';
+    }
+
+
+    return $editorDeletePermission == 1 ? '<div class="dropdown custom-dropdown">
+    <a class="dropdown-toggle font-20 text-primary" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<i class="las la-cog"></i>
+</a>
+<div class="dropdown-menu" aria-labelledby="dropdownMenuLink1" style="will-change: transform;">
+ ' .
+        '<a class="dropdown-item" href="' . route('ai.question.paper.start', ['id' =>  $model->id]) . '">start</a>' .
+        '</div>
+
 </div>' : null;
 }
 function custommodalButton($model, $permission, $route = null, $isShowView = false)

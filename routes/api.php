@@ -34,13 +34,13 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::resource('role', RoleController::class);
         Route::resource('user', UserController::class);
-        Route::resource('visitor', VisitorController::class);
-        Route::resource('district', DistrictController::class);
-        Route::resource('tehsil', TehsilController::class);
+        // Route::resource('visitor', VisitorController::class);
+        // Route::resource('district', DistrictController::class);
+        // Route::resource('tehsil', TehsilController::class);
 
-        Route::get('visitor/status{status}', [VisitorController::class, 'visitor_status']);
+        // Route::get('visitor/status{status}', [VisitorController::class, 'visitor_status']);
         Route::group(['prefix' => 'visitors'], function () {
-            Route::get('dashboard', [VisitorController::class, 'dashboard']);
+            // Route::get('dashboard', [VisitorController::class, 'dashboard']);
         });
 
         Route::group(['prefix' => 'profile'], function () {

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $paper->subject->name }}</title>
     <link rel="stylesheet" href="{{ asset('assets/css/paper.css') }}">
+
 </head>
 
 <body dir="{{ $paper->papertype == 'urdu' ? 'rtl' : 'ltr' }}">
